@@ -12,7 +12,7 @@
 #
 # (c) 2014, Benjamin Dos Santos <benjamin.dossantos@gmail.com>
 # https://github.com/bdossantos/nagios-plugins
-# (c) 2020. Stan Kliuiev <demonoid.wolf@gmail.com> nksupport.com
+# (c) 2020. Stan Kliuiev <demonoid.wolf@gmail.com> nksupport.com  slave status check has been added.
 
 while [[ -n "$1" ]]; do
   case $1 in
