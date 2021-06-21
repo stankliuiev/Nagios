@@ -1,5 +1,5 @@
 #!/bin/sh
-#simple mysqldump backup script from docker container
+#simple mysqldump backup script to backup databases from docker container
 
 DUMPDIR=/your/dump/directory/
 mysql="docker exec -t mariadb mysql -uroot --password=yourpass"
