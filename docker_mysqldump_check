@@ -1,0 +1,16 @@
+#!/bin/sh
+#monitoring script for mysqldump from docker container
+
+dumpdir=/var/dxm.mysqldump/
+mysqldump_date=$(cd $dumpdir; find -name '*.sql.gz' | cut -d '.' -f 3,3 | head -n 1)
+current_date=$(date +%F)
+
+if [ "$mysqldump_date" = "$current_date" ]
+then
+    echo "all mysqldumps are up to date"
+    exit 0
+elif [ "$mysqldump_date" =! "$current_date" ]
+then
+    echo "mysqldump is NOT ok, need attention!"
+    exit 1
+fi
