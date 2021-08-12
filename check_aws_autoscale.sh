@@ -3,11 +3,11 @@
 #Stanislav Kliuiev, 2021-08-12
 #https://nksupport.com
 
-balancer_arn=$(/usr/local/bin/aws elbv2 describe-load-balancers --names "weboffertorocom-prod-new-lb" |  grep LoadBalancerArn | awk '{print $2}'| tr -d '",')
+balancer_arn=$(/usr/local/bin/aws elbv2 describe-load-balancers --names "yourbalancername" |  grep LoadBalancerArn | awk '{print $2}'| tr -d '",')
 balancer_tg=$(/usr/local/bin/aws elbv2 describe-target-groups --load-balancer-arn "$balancer_arn" | grep TargetGroupName | tr -d '",' | awk '{print $2}')
 autoscalegroupname=$(/usr/local/bin/aws autoscaling describe-auto-scaling-groups --query "AutoScalingGroups[? TargetGroupARNs [? contains(@, '$balancer_arn')]].AutoScalingGroupName" |tr -d '"' |head -2 |tail -1)
 maxinstances=$(/usr/local/bin/aws autoscaling describe-auto-scaling-groups --auto-scaling-group-name $autoscalegroupname --query "AutoScalingGroups[*].MaxSize" |head -2 |tail -1)
-instancesrunning=$(/usr/local/bin/aws ec2 describe-instances | grep CodeDeploy_offertoro-deployment | wc -l)
+instancesrunning=$(/usr/local/bin/aws ec2 describe-instances | grep autoscalegroupname | wc -l)
 warning_limit=$(echo "$(( $maxinstances / 10 * 8 ))")
 
 #for test purposes
