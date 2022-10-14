@@ -1,6 +1,6 @@
 #!/bin/sh
 #wrote by Stan Kliuiev 2022.10.14
-#the owner of this file must be postgres 
+#the owner:group of this file must be postgres 
 #set -x
 
 latest_backup_date=$(/usr/bin/sed -n '1p' /tmp/backup.txt)
