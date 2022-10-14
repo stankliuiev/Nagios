@@ -1,4 +1,4 @@
 # Nagios
 monitoring scripts
 
-This is a set of different custom bash scripts
+This is a set of different custom monitoring bash scripts for NAGIOS
