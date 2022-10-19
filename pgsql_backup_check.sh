@@ -1,5 +1,6 @@
 #!/bin/sh
 #wrote by Stan Kliuiev 2022.10.14
+#Changelog 2022.10.19 - changed method of checking backup copies.
 #the owner:group of this file must be postgres 
 #set -x
 
