@@ -4,7 +4,6 @@
 #It could be useful when memory monitoring does not respond quickly enough to memory spikes
 #please note that you need to add sudoers proviliges for nrpe user to check /var/log/messages
 #nrpe    ALL=(root) NOPASSWD:/usr/bin/grep oom-kill /var/log/messages
-RESULT=0
 
 # exit statuses recognized by Nagios
 OK=0
