@@ -12,8 +12,6 @@ WARNING=1
 CRITICAL=2
 UNKNOWN=3
 
-
-
 OOM_ACTION_DATE=$(sudo grep oom-kill /var/log/messages | tail -1 | awk '{print $1,$2,$3}')
 OOM_ACTION_DATE_EPOCH=$(date -d "$OOM_ACTION_DATE" +"%s")
 ACTUAL_DATE=$(date | awk '{print $2,$3,$4}')
