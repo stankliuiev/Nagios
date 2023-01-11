@@ -11,6 +11,7 @@ WARNING=1
 CRITICAL=2
 UNKNOWN=3
 
+#variables
 OOM_ACTION_DATE=$(sudo grep oom-kill /var/log/messages | tail -1 | awk '{print $1,$2,$3}')
 OOM_ACTION_DATE_EPOCH=$(date -d "$OOM_ACTION_DATE" +"%s")
 ACTUAL_DATE=$(date | awk '{print $2,$3,$4}')
@@ -18,6 +19,7 @@ ACTUAL_DATE_EPOCH=$(date -d "$ACTUAL_DATE" +"%s")
 DATE_DELAY_CRIT=$(($ACTUAL_DATE_EPOCH - 40000))
 DATE_DELAY_WARN=$(($ACTUAL_DATE_EPOCH - 80000))
 
+#compare
 if [ "$OOM_ACTION_DATE" = "" ];
 then
     echo "oom-killer was never invoked (in the last logfile)"
