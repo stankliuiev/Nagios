@@ -11,14 +11,14 @@ CRITICAL=2
 UNKNOWN=3
 
 
-wget -O- -q  someip:15692/metrics > /tmp/metrics
+metrics=$(curl -s someip:15692/metrics)
+unroutable_returned=$(echo "$metrics" | grep '^rabbitmq_channel_messages_unroutable_returned_total' | sed "s/^[^ ]* //")
+uptime_seconds=$(echo "$metrics" | grep '^rabbitmq_erlang_uptime_seconds' | sed "s/^[^ ]* //"|cut -d '.' -f 1)
+disk_space_available=$(echo "$metrics" | grep '^rabbitmq_disk_space_available_bytes' | sed "s/^[^ ]* //")
+used_memory=$(echo "$metrics" | grep '^erlang_vm_memory_processes_bytes_total{usage="used"}' | sed "s/^[^ ]* //")
+free_memory=$(echo "$metrics" | grep '^erlang_vm_memory_processes_bytes_total{usage="free"}' | sed "s/^[^ ]* //")
+rabbitmq_queue_consumers=$(echo "$metrics" | grep '^rabbitmq_queue_consumers' | sed "s/^[^ ]* //")
 
-unroutable_returned=$(grep '^rabbitmq_channel_messages_unroutable_returned_total' /tmp/metrics | sed "s/^[^ ]* //")
-uptime_seconds=$(grep '^rabbitmq_erlang_uptime_seconds' /tmp/metrics | sed "s/^[^ ]* //"|cut -d '.' -f 1)
-disk_space_available=$(grep '^rabbitmq_disk_space_available_bytes' /tmp/metrics | sed "s/^[^ ]* //")
-used_memory=$(grep '^erlang_vm_memory_processes_bytes_total{usage="used"}' /tmp/metrics | sed "s/^[^ ]* //")
-free_memory=$(grep '^erlang_vm_memory_processes_bytes_total{usage="free"}' /tmp/metrics | sed "s/^[^ ]* //")
-rabbitmq_queue_consumers=$(grep '^rabbitmq_queue_consumers' /tmp/metrics | sed "s/^[^ ]* //")
 
 if [ "$unroutable_returned" -lt 1 ]
 then
